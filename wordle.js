@@ -115,14 +115,14 @@ function update() {
 let guess = "";
 document.getElementById("answer").innerText = "";
 
-//string up the guesses into the word
+
 for (let c = 0; c < width; c++) {
     let currTile = document.getElementById(row.toString() + '-' + c.toString());
     let letter = currTile.innerText;
     guess += letter;
 }
 
-guess = guess.toLowerCase(); //case sensitive
+guess = guess.toLowerCase(); 
 console.log(guess);
 
 if (!guessList.includes(guess)) {
@@ -133,7 +133,7 @@ if (!guessList.includes(guess)) {
 //start processing guess
 let correct = 0;
 
-let letterCount = {}; //keep track of letter frequency, ex) KENNY -> {K:1, E:1, N:2, Y: 1}
+let letterCount = {}; 
 for (let i = 0; i < word.length; i++) {
     let letter = word[i];
 
@@ -147,7 +147,7 @@ for (let i = 0; i < word.length; i++) {
 
 console.log(letterCount);
 
-//first iteration, check all the correct ones first
+
 for (let c = 0; c < width; c++) {
     let currTile = document.getElementById(row.toString() + '-' + c.toString());
     let letter = currTile.innerText;
@@ -161,7 +161,7 @@ for (let c = 0; c < width; c++) {
         keyTile.classList.add("correct");
 
         correct += 1;
-        letterCount[letter] -= 1; //deduct the letter count
+        letterCount[letter] -= 1;
     }
 
     if (correct == width) {
@@ -170,14 +170,14 @@ for (let c = 0; c < width; c++) {
 }
 
 console.log(letterCount);
-//go again and mark which ones are present but in wrong position
+
 for (let c = 0; c < width; c++) {
     let currTile = document.getElementById(row.toString() + '-' + c.toString());
     let letter = currTile.innerText;
 
     // skip the letter if it has been marked correct
     if (!currTile.classList.contains("correct")) {
-        //Is it in the word?         //make sure we don't double count
+        //Is it in the word?        
         if (word.includes(letter) && letterCount[letter] > 0) {
             currTile.classList.add("present");
             
@@ -186,7 +186,7 @@ for (let c = 0; c < width; c++) {
                 keyTile.classList.add("present");
             }
             letterCount[letter] -= 1;
-        } // Not in the word or (was in word but letters all used up to avoid overcount)
+        } 
         else {
             currTile.classList.add("absent");
             let keyTile = document.getElementById("Key" + letter);
